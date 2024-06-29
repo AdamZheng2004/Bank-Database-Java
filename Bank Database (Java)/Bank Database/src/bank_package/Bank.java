@@ -1,15 +1,37 @@
 package bank_package;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Bank {
-    String location = "";
-    int branchNumber = 0;
-    int numEmployee = 0;
-    int numClient = 0;
+    private static Map<Integer, String> branches = new HashMap<>();
+    private Integer branchNumber;
+    private String location;
 
-    public void displayInfo() {
-        System.out.println("Location: " + location);
-        System.out.println("Branch Number: " + branchNumber);
-        System.out.println("Number of Employees: " + numEmployee);
-        System.out.println("Number of Clients: " + numClient);
-    }// method displayInfo
+    public Bank(Integer branchNumber, String location) {
+        if (branches.containsKey(branchNumber)) {
+            throw new IllegalArgumentException("Branch Already Exists.\n");
+        }// if
+
+        this.branchNumber = branchNumber;
+        this.location = location;
+        branches.put(branchNumber, location);
+        System.out.println("Branch: " + branchNumber + " Located at: " + location + " Successfully Added.\n");
+    }// Bank 
+
+    public Integer getBranchNumber() {
+        return branchNumber;
+    }// getBranchNumber()
+
+    public String getLocation() {
+        return location;
+    }// getLocation()
+
+    public void setLocation(String location) {
+        this.location = location;
+    }// setLocation()
+
+    public void displayInfo(Integer branchNumber) {
+        String location = branches.get(branchNumber);
+        System.out.println("Branch: " + branchNumber + " Located at: " + location + ".\n");
+    }// displayInfo()
 }// class Bank
